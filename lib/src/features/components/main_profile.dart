@@ -92,9 +92,10 @@ class _MainProfileState extends State<MainProfile> {
 
     if (direction == CardSwiperDirection.left ||
         direction == CardSwiperDirection.bottom) {
-      draggableItems.removeAt(0);
-
-      setState(() {});
+      // emtoy the list
+      setState(() {
+        draggableItems = [];
+      });
 
       return true;
     }

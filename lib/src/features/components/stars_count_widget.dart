@@ -22,10 +22,10 @@ class StarsCountWidget extends StatelessWidget {
         child: Row(
           children: [
             SvgPicture.asset(ImageAssets.starTop),
-            const SizedBox(width: 5),
+            const SizedBox(width: 3),
             Text(
               StringValues.starsValue,
-              style: CustomTextStyles.boldTextStyle,
+              style: CustomTextStyles.regularTextStyle,
             ),
           ],
         ),

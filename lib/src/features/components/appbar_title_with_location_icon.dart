@@ -13,11 +13,11 @@ class AppBarTitleWithLocationIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(ImageAssets.locationMark, height: 35),
+        SvgPicture.asset(ImageAssets.locationMark, height: 30),
         const SizedBox(width: 3),
         Text(
           StringValues.appBarTitleText,
-          style: CustomTextStyles.boldTextStyle,
+          style: CustomTextStyles.regularTextStyle,
         ),
       ],
     );
