@@ -14,36 +14,38 @@ class ProfileListEmptyWidget extends StatefulWidget {
 class _ProfileListEmptyWidgetState extends State<ProfileListEmptyWidget> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        BlocProvider.of<ProfilesBloc>(context).add(const ProfilesGetEvent());
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '추천 드릴 친구들을 준비 중이에요',
-                textAlign: TextAlign.center,
-                style: CustomTextStyles.headline4BoldStyle,
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '매일 새로운 친구들을 소개시켜드려요',
-                textAlign: TextAlign.center,
-                style: CustomTextStyles.regularTextStyle
-                    .copyWith(color: AppColors.greyText),
-              ),
-            ],
-          ),
-        ],
+    return Center(
+      child: InkWell(
+        onTap: () {
+          BlocProvider.of<ProfilesBloc>(context).add(const ProfilesGetEvent());
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '추천 드릴 친구들을 준비 중이에요',
+                  textAlign: TextAlign.center,
+                  style: CustomTextStyles.headline4BoldStyle,
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '매일 새로운 친구들을 소개시켜드려요',
+                  textAlign: TextAlign.center,
+                  style: CustomTextStyles.regularTextStyle
+                      .copyWith(color: AppColors.greyText),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -48,91 +48,88 @@ class _ProfileCardState extends State<ProfileCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Center(
-        child: Container(
-          width: widget.width,
-          height: widget.height,
-          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          child: Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
-                child: Image.asset(
-                  imageSource(imageIndex),
-                  fit: BoxFit.fitWidth,
-                  width: widget.width,
-                  height: widget.height,
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Material(
+        color: Colors.transparent,
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image.asset(
+                imageSource(imageIndex),
+                fit: BoxFit.cover,
+                width: widget.width,
+                height: widget.height,
+              ),
+            ),
+            //_buildProfileImage(),
+            _buildBlackGradientOverlay(),
+            _buildProfileInfoDataWidget(),
+            Positioned(
+              left: 0,
+              top: 0,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (imageIndex > 0) {
+                      imageIndex--;
+                    }
+                  });
+                  setState(() {
+                    cardDataToShowOnImage = getProfileDataToShow(imageIndex);
+                  });
+                },
+                behavior: HitTestBehavior.opaque,
+                child: const SizedBox(
+                  width: 160,
+                  height: 100,
                 ),
               ),
-              //_buildProfileImage(),
-              _buildBlackGradientOverlay(),
-              _buildProfileInfoDataWidget(),
-              Positioned(
-                left: 0,
-                top: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      if (imageIndex > 0) {
-                        imageIndex--;
-                      }
-                    });
-                    setState(() {
-                      cardDataToShowOnImage = getProfileDataToShow(imageIndex);
-                    });
-                  },
-                  behavior: HitTestBehavior.opaque,
-                  child: const SizedBox(
-                    width: 160,
-                    height: 100,
+            ),
+            Positioned(
+              right: 0,
+              top: 0,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (imageIndex < widget.profile.images.length - 1) {
+                      imageIndex++;
+                    }
+                  });
+                  setState(() {
+                    cardDataToShowOnImage = getProfileDataToShow(imageIndex);
+                  });
+                },
+                behavior: HitTestBehavior.opaque,
+                child: const SizedBox(
+                  width: 160,
+                  height: 100,
+                ),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              bottom: 0,
+              child: Container(
+                width: widget.width,
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: const Center(
+                  child: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: AppColors.white245,
                   ),
                 ),
               ),
-              Positioned(
-                right: 0,
-                top: 0,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      if (imageIndex < widget.profile.images.length - 1) {
-                        imageIndex++;
-                      }
-                    });
-                    setState(() {
-                      cardDataToShowOnImage = getProfileDataToShow(imageIndex);
-                    });
-                  },
-                  behavior: HitTestBehavior.opaque,
-                  child: const SizedBox(
-                    width: 160,
-                    height: 100,
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 0,
-                bottom: 0,
-                child: Container(
-                  width: widget.width,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: const Center(
-                    child: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: AppColors.white245,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 24,
-                bottom: 60,
-                child: SvgPicture.asset('assets/images/love.svg'),
-              ),
-              _buildImageNavigationIndicator(),
-            ],
-          ),
+            ),
+            Positioned(
+              right: 15,
+              bottom: 60,
+              child: SvgPicture.asset('assets/images/love.svg'),
+            ),
+            _buildImageNavigationIndicator(),
+          ],
         ),
       ),
     );
@@ -200,7 +197,7 @@ class _ProfileCardState extends State<ProfileCard> {
 
   Widget _buildProfileInfoDataWidget() {
     return Positioned(
-      left: 24,
+      left: 15,
       bottom: 60,
       child: Column(
         mainAxisSize: MainAxisSize.min,

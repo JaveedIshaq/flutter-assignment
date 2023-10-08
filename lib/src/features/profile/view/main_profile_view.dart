@@ -52,30 +52,26 @@ class _MainProfileViewState extends State<MainProfileView> {
           hasNotification: true,
         ),
       ),
-      body: Container(
-        constraints: const BoxConstraints(minHeight: 700),
-        child: BlocBuilder<ProfilesBloc, ProfilesState>(
-          builder: (context, state) {
-            if (state is ProfilesLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
+      body: BlocBuilder<ProfilesBloc, ProfilesState>(
+        builder: (context, state) {
+          if (state is ProfilesLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-            if (state is ProfilesLoaded) {
-              return Container(
-                constraints: const BoxConstraints(minHeight: 700),
-                child: ProfileList(
-                  fetchedProfilesList: state.profilesList,
-                ),
-              );
-            }
+          if (state is ProfilesLoaded) {
+            return Center(
+              child: ProfileList(
+                fetchedProfilesList: state.profilesList,
+              ),
+            );
+          }
 
-            if (state is ProfilesError) {
-              return Center(child: Text(state.errorMessage));
-            }
+          if (state is ProfilesError) {
+            return Center(child: Text(state.errorMessage));
+          }
 
-            return const SizedBox.shrink();
-          },
-        ),
+          return const SizedBox.shrink();
+        },
       ),
       extendBody: true,
       bottomNavigationBar: const BottomNavBarWidget(),

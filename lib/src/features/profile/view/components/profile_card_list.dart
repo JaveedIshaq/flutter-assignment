@@ -32,50 +32,49 @@ class _ProfileListState extends State<ProfileList> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height - 200,
-      child: allProfilesList.isEmpty
-          ? const ProfileListEmptyWidget()
-          : Stack(
-              children: [
-                // Display the current profile card with swipe functionality.
-                CardSwiper(
-                  allowedSwipeDirection:
-                      AllowedSwipeDirection.only(left: true, down: true),
-                  controller: controller,
-                  cardsCount: allProfilesList.length,
-                  onSwipe: _onSwipe,
-                  onUndo: _onUndo,
-                  numberOfCardsDisplayed: 1,
-                  backCardOffset: const Offset(40, 40),
-                  padding: const EdgeInsets.only(bottom: 40.0),
-                  cardBuilder: (
-                    context,
-                    index,
-                    horizontalThresholdPercentage,
-                    verticalThresholdPercentage,
-                  ) =>
-                      ProfileCard(
+    return allProfilesList.isEmpty
+        ? const ProfileListEmptyWidget()
+        : Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              // Display the current profile card with swipe functionality.
+              CardSwiper(
+                allowedSwipeDirection:
+                    AllowedSwipeDirection.only(left: true, down: true),
+                controller: controller,
+                cardsCount: allProfilesList.length,
+                onSwipe: _onSwipe,
+                onUndo: _onUndo,
+                numberOfCardsDisplayed: 1,
+                backCardOffset: const Offset(40, 40),
+                padding: const EdgeInsets.only(bottom: 80),
+                cardBuilder: (
+                  context,
+                  index,
+                  horizontalThresholdPercentage,
+                  verticalThresholdPercentage,
+                ) =>
+                    ProfileCard(
+                  key: Key('$selectedProfileIndex'),
+                  profile: allProfilesList[selectedProfileIndex],
+                  width: MediaQuery.of(context).size.width - 70,
+                  height: MediaQuery.of(context).size.height - 220,
+                ),
+              ),
+              // Show a small part of the next card to indicate more cards are available.
+              if (selectedProfileIndex + 1 < allProfilesList.length)
+                Positioned(
+                  left: MediaQuery.of(context).size.width - 20,
+                  top: 0,
+                  child: ProfileCard(
                     key: Key('$selectedProfileIndex'),
-                    profile: allProfilesList[selectedProfileIndex],
-                    width: MediaQuery.of(context).size.width - 60,
-                    height: MediaQuery.of(context).size.height - 200,
+                    profile: allProfilesList[selectedProfileIndex + 1],
+                    width: MediaQuery.of(context).size.width - 70,
+                    height: MediaQuery.of(context).size.height - 220,
                   ),
                 ),
-                // Show a small part of the next card to indicate more cards are available.
-                if (selectedProfileIndex + 1 < allProfilesList.length)
-                  Positioned(
-                    left: MediaQuery.of(context).size.width - 30,
-                    top: 15,
-                    child: ProfileCard(
-                      key: Key('$selectedProfileIndex'),
-                      profile: allProfilesList[selectedProfileIndex + 1],
-                    ),
-                  ),
-              ],
-            ),
-    );
+            ],
+          );
   }
 
   bool _onSwipe(
