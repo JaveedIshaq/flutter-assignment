@@ -1,6 +1,7 @@
 class ImageAssets {
   static const locationMark = 'assets/images/location.svg';
   static const starTop = 'assets/images/star_top.svg';
+  static const starDark = 'assets/images/star-icon-dark.svg';
   static const notificationIconPath = 'assets/images/notification.svg';
 
   static const homeIcon = 'assets/images/home.svg';
